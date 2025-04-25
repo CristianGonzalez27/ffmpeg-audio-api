@@ -11,7 +11,8 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 app.use(cors());
 
-app.post("/convert", upload.single("video"), (req, res) => {
+// Ruta principal para subir el archivo y convertir
+app.post("/convert", upload.single("data"), (req, res) => {
   const inputPath = req.file.path;
   const outputPath = `outputs/${req.file.filename}.mp3`;
 
@@ -31,6 +32,8 @@ app.post("/convert", upload.single("video"), (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor listo en puerto 3000");
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor listo en puerto ${PORT}`);
 });
