@@ -11,7 +11,6 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 app.use(cors());
 
-// Ruta principal para subir el archivo y convertir
 app.post("/convert", upload.single("data"), (req, res) => {
   const inputPath = req.file.path;
   const outputPath = `outputs/${req.file.filename}.mp3`;
@@ -27,13 +26,12 @@ app.post("/convert", upload.single("data"), (req, res) => {
       });
     })
     .on("error", (err) => {
-      console.error(err);
+      console.error("Error al convertir:", err);
       res.status(500).send("Error al convertir el archivo.");
     });
 });
 
-// Iniciar el servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor listo en puerto ${PORT}`);
+app.listen(3000, () => {
+  console.log("Servidor listo en puerto 3000");
 });
+
